@@ -19,7 +19,7 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = train_test_split(x, y, train_size=.7, random_state=42)
 
     # Substituir regressor linear por árvore de decisão
-    regressor = DecisionTreeRegressor(random_state=42)
+    regressor = DecisionTreeRegressor(random_state=0,max_depth=5)
     regressor.fit(X_train, y_train)
 
     # Fazendo previsões com o conjunto de teste
