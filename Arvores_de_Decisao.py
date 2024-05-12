@@ -19,7 +19,7 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = train_test_split(x, y, train_size=.7, random_state=42)
 
     # Substituir regressor linear por árvore de decisão
-    regressor = DecisionTreeRegressor(random_state=1000)
+    regressor = DecisionTreeRegressor(random_state=42)
     regressor.fit(X_train, y_train)
 
     # Fazendo previsões com o conjunto de teste
@@ -47,16 +47,5 @@ if __name__ == '__main__':
     plt.xlabel("Data")
     plt.ylabel("Preço de Fechamento")
     plt.title("Árvore de Decisão")
-    plt.xticks(rotation=45)  # Rotaciona os rótulos do eixo x para melhor visualização
-    plt.show()
-
-    # Calculando os resíduos
-    residuos = y_test - y_pred
-
-    # Plotando os resíduos
-    plt.scatter(X_test, residuos)
-    plt.axhline(y=0, color='red', linestyle='--')
-    plt.xlabel("Data")
-    plt.ylabel("Resíduos")
-    plt.title("Análise Residual")
+    plt.xticks(np.arange(0, len(datas_convertidas), 100), rotation=45)  # Ajusta a frequência e rotação dos rótulos do eixo x
     plt.show()
