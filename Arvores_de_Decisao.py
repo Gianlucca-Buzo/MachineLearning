@@ -49,3 +49,14 @@ if __name__ == '__main__':
     plt.title("Árvore de Decisão")
     plt.xticks(np.arange(0, len(datas_convertidas), 100), rotation=45)  # Ajusta a frequência e rotação dos rótulos do eixo x
     plt.show()
+
+    # Calculando os resíduos
+    residuos = y_test - y_pred
+
+    # Plotando os resíduos
+    plt.scatter(X_test, residuos)
+    plt.axhline(y=0, color='red', linestyle='--')
+    plt.xlabel("Data")
+    plt.ylabel("Resíduos")
+    plt.title("Análise Residual")
+    plt.show()
