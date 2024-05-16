@@ -1,8 +1,9 @@
 import pandas as pd
 import datetime as dt
+from sklearn.preprocessing import MinMaxScaler
 
 # Carregar o arquivo CSV
-nome_arquivo = 'BTC-USD.csv'
+nome_arquivo = 'datasets/coin_Bitcoin.csv'
 
 nome_arquivo_sem_sufixo = nome_arquivo.split(".")[0]
 df = pd.read_csv(nome_arquivo)
@@ -11,17 +12,22 @@ df = pd.read_csv(nome_arquivo)
 print("DataFrame original:")
 print(df.head())
 
-
-df['DateTime'] = pd.to_datetime(df['Date'])
-df['DateTime'] = df['DateTime'].map(dt.datetime.toordinal)
+# Converter a coluna 'Date' para o formato ordinal
+df['Date'] = pd.to_datetime(df['Date'])
+df['Date'] = df['Date'].map(dt.datetime.toordinal)
 
 # Remover algumas colunas
-colunas_para_remover = ['Date', 'Open','High','Low','Adj Close','Volume']  # Substitua 'coluna1', 'coluna2' pelos nomes das colunas que deseja remover
+colunas_para_remover = ['SNo', 'Name','Symbol']
 df = df.drop(columns=colunas_para_remover)
 
-# Exibir as primeiras linhas do DataFrame após a remoção das colunas
-print("\nDataFrame após a remoção das colunas:")
-print(df.head())
+# Normalizar colunas específicas usando MinMaxScaler
+colunas_para_normalizar = ['High', 'Low', 'Open', 'Close', 'Volume', 'Marketcap']
+scaler = MinMaxScaler()
+df[colunas_para_normalizar] = scaler.fit_transform(df[colunas_para_normalizar])
+
+# Exibir as primeiras linhas do DataFrame após a remoção das colunas e normalização
+print("\nDataFrame após a remoção das colunas e normalização:")
+print(df)
 
 # Salvar o DataFrame em um novo arquivo CSV
 novo_nome_arquivo = nome_arquivo_sem_sufixo + "_PreProcessado.csv"  # Nome do novo arquivo CSV
