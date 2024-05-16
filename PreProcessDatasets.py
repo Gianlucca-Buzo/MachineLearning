@@ -17,13 +17,13 @@ df['Date'] = pd.to_datetime(df['Date'])
 df['Date'] = df['Date'].map(dt.datetime.toordinal)
 
 # Remover algumas colunas
-colunas_para_remover = ['SNo', 'Name','Symbol']
+colunas_para_remover = ['SNo', 'Name','Symbol', 'Marketcap', 'Open']
 df = df.drop(columns=colunas_para_remover)
 
 # Normalizar colunas específicas usando MinMaxScaler
-colunas_para_normalizar = ['High', 'Low', 'Open', 'Close', 'Volume', 'Marketcap']
-scaler = MinMaxScaler()
-df[colunas_para_normalizar] = scaler.fit_transform(df[colunas_para_normalizar])
+# colunas_para_normalizar = [ 'Close', 'Volume', 'High', 'Low']
+# scaler = MinMaxScaler()
+# df[colunas_para_normalizar] = scaler.fit_transform(df[colunas_para_normalizar])
 
 # Exibir as primeiras linhas do DataFrame após a remoção das colunas e normalização
 print("\nDataFrame após a remoção das colunas e normalização:")

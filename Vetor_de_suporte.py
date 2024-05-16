@@ -7,14 +7,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error as MSE
 
-data = pd.read_csv('BTC-USD_PreProcessado.csv')
+df_btc = pd.read_csv('datasets/coin_Bitcoin_PreProcessado.csv')
 
 # Dividir os dados em variáveis independentes (X) e variável dependente (y)
-X = np.array(data['DateTime']).reshape(-1, 1)  # Precisamos converter para o formato 2D
-y = np.array(data['Close'])
+X = df_btc.drop(['Close'],axis=1)  # Precisamos converter para o formato 2D
+y = np.array(df_btc['Close'])
 
 # Dividir os dados em conjuntos de treinamento e teste
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.7, random_state=42)
 
 stdsc = StandardScaler()
 x_train_std = stdsc.fit_transform(X_train)
